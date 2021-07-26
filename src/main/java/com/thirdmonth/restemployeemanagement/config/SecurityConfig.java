@@ -41,11 +41,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         UserDetails max = User.builder()
                 .username("maxresigner")
                 .password(passwordEncoder.encode("password"))
-                .roles("STUDENT") // ROLE_STUDENT
+                .roles(UserRole.STUDENT.name()) // ROLE_STUDENT
+                .build();
+
+        UserDetails anna = User.builder()
+                .username("annaholmes")
+                .password(passwordEncoder.encode("password"))
+                .roles(UserRole.ADMIN.name())
                 .build();
 
         return new InMemoryUserDetailsManager(
-                max
+                max, anna
         );
 
     }
